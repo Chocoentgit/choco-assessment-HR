@@ -272,6 +272,116 @@ textarea:focus{outline:none;border-color:var(--caramel);box-shadow:0 0 0 4px var
   .topbar,.floating,.btn-row,.foot{display:none!important}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+:root{
+  --ink:#241813; --paper:#fbf7f0; --card:#fffdf9; --line:#e7dccb; --muted:#8a7a6a;
+  --cocoa:#5a4334; --caramel:#c8772e; --caramel-deep:#a85e1f; --plum:#7a2e48;
+  --ok:#4f8a46; --no:#c0492b;
+  --grotesk:"Space Grotesk",sans-serif;
+  --cjk:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif;
+  --shadow:0 8px 30px rgba(60,38,20,.10);
+}
+#adminApp *{box-sizing:border-box}
+#adminApp{margin:0;background:var(--paper);color:var(--ink);font-family:var(--cjk);line-height:1.6}
+#adminApp .num{font-family:var(--grotesk);font-variant-numeric:tabular-nums}
+#adminApp a{color:var(--caramel-deep)}
+#adminApp .topbar{background:var(--ink);color:#f3e7d9;padding:14px 26px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:20}
+#adminApp .topbar .brand{font-family:var(--grotesk);font-weight:700;letter-spacing:.04em}
+#adminApp .topbar .brand b{color:var(--caramel)}
+#adminApp .topbar .sub{font-size:12px;color:#bfae9f;margin-left:10px}
+#adminApp .topbar .right{display:flex;gap:10px;align-items:center}
+#adminApp .btn{font-family:var(--cjk);border:none;border-radius:10px;padding:9px 16px;font-size:14px;cursor:pointer;transition:.15s}
+#adminApp .btn-amber{background:var(--caramel);color:#fff}
+#adminApp .btn-amber:hover{background:var(--caramel-deep)}
+#adminApp .btn-ghost{background:transparent;border:1px solid #5a4334;color:#f3e7d9}
+#adminApp .btn-ghost:hover{border-color:var(--caramel)}
+#adminApp .btn-line{background:#fff;border:1px solid var(--line);color:var(--cocoa)}
+#adminApp .btn-line:hover{border-color:var(--caramel)}
+#adminApp .btn:disabled{opacity:.5;cursor:not-allowed}
+#adminApp .wrap{max-width:1180px;margin:0 auto;padding:24px 26px 80px}
+
+#adminApp /* login */
+.login{max-width:420px;margin:9vh auto;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:34px 30px;box-shadow:var(--shadow)}
+#adminApp .login h1{font-size:21px;margin:0 0 4px}
+#adminApp .login .eyebrow{font-family:var(--grotesk);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--caramel-deep);margin-bottom:14px}
+#adminApp .login p{font-size:13px;color:var(--muted);margin-top:0}
+#adminApp .login label{display:block;font-size:13px;font-weight:600;margin:14px 0 6px}
+#adminApp .login input{width:100%;border:1px solid var(--line);border-radius:11px;padding:12px 14px;font-size:15px;font-family:var(--cjk);background:#fff}
+#adminApp .login input:focus{outline:none;border-color:var(--caramel)}
+#adminApp .login .err{color:var(--no);font-size:13px;min-height:18px;margin-top:10px}
+#adminApp .login .btn-amber{width:100%;margin-top:8px;padding:12px}
+#adminApp .hint{background:#fdf6ec;border:1px solid #f0e0c6;border-radius:12px;padding:12px 14px;font-size:12.5px;color:var(--cocoa);margin-top:16px}
+
+#adminApp /* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:6px 0 20px}
+#adminApp .stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+#adminApp .stat .n{font-family:var(--grotesk);font-weight:700;font-size:28px;color:var(--caramel)}
+#adminApp .stat .l{font-size:12.5px;color:var(--muted);margin-top:2px}
+#adminApp .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+#adminApp .chips{display:flex;gap:8px;flex-wrap:wrap}
+#adminApp .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font-size:13px;cursor:pointer;color:var(--cocoa)}
+#adminApp .chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+#adminApp .search{flex:1;min-width:180px}
+#adminApp .search input{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 13px;font-size:14px;font-family:var(--cjk);background:#fff}
+#adminApp .search input:focus{outline:none;border-color:var(--caramel)}
+
+#adminApp /* table */
+.tablecard{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+#adminApp table{width:100%;border-collapse:collapse;font-size:14px}
+#adminApp thead th{background:#f3ece1;text-align:left;padding:11px 14px;font-size:12px;color:var(--cocoa);font-weight:600;white-space:nowrap}
+#adminApp tbody td{border-top:1px solid var(--line);padding:11px 14px;vertical-align:middle}
+#adminApp tbody tr{cursor:pointer}
+#adminApp tbody tr:hover{background:#fcf6ec}
+#adminApp .posbadge{display:inline-block;font-size:11.5px;padding:3px 9px;border-radius:999px;font-weight:600}
+#adminApp .pos-base{background:#eef6e9;color:#4f8a46}
+#adminApp .pos-pr{background:#fdeede;color:#a85e1f}
+#adminApp .pos-creative{background:#f6e9ef;color:#7a2e48}
+#adminApp .score{font-family:var(--grotesk);font-weight:700}
+#adminApp .bar{height:6px;border-radius:4px;background:#eee3d3;margin-top:4px;overflow:hidden;width:84px}
+#adminApp .bar > i{display:block;height:100%;background:var(--caramel)}
+#adminApp .empty{padding:46px;text-align:center;color:var(--muted)}
+#adminApp .muted{color:var(--muted)}
+
+#adminApp /* detail drawer */
+.overlay{position:fixed;inset:0;background:rgba(36,24,19,.5);z-index:40;display:none}
+#adminApp .overlay.show{display:block}
+#adminApp .drawer{position:fixed;top:0;right:0;height:100%;width:min(680px,94vw);background:var(--paper);z-index:50;box-shadow:-10px 0 40px rgba(0,0,0,.2);transform:translateX(100%);transition:.25s;overflow-y:auto}
+#adminApp .drawer.show{transform:translateX(0)}
+#adminApp .dhead{position:sticky;top:0;background:var(--ink);color:#f3e7d9;padding:18px 22px;display:flex;justify-content:space-between;align-items:flex-start;z-index:2}
+#adminApp .dhead h2{margin:0;font-size:18px}
+#adminApp .dhead .meta{font-size:12.5px;color:#cdbfae;margin-top:4px}
+#adminApp .dclose{background:transparent;border:none;color:#f3e7d9;font-size:22px;cursor:pointer;line-height:1}
+#adminApp .dbody{padding:20px 22px}
+#adminApp .infogrid{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:13.5px;margin-bottom:18px}
+#adminApp .infogrid .k{color:var(--muted);font-size:12px}
+#adminApp .scorebox{display:flex;gap:12px;margin-bottom:18px}
+#adminApp .scorebox .b{flex:1;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center}
+#adminApp .scorebox .big{font-family:var(--grotesk);font-weight:700;font-size:26px;color:var(--caramel)}
+#adminApp .scorebox .lab{font-size:11.5px;color:var(--muted);margin-top:2px}
+#adminApp .secttl{font-size:12px;letter-spacing:.04em;color:var(--caramel-deep);font-weight:700;margin:20px 0 8px;text-transform:uppercase}
+#adminApp .qrow{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:9px}
+#adminApp .qrow .qt{font-weight:600;font-size:14px;margin-bottom:7px}
+#adminApp .qrow .opt{font-size:13px;padding:3px 0;color:var(--cocoa)}
+#adminApp .qrow .opt.pick{color:var(--ink);font-weight:600}
+#adminApp .qrow .opt .tag{font-size:11px;margin-left:6px;padding:1px 7px;border-radius:6px}
+#adminApp .tag-your{background:#eef2f7;color:#4a6785}
+#adminApp .tag-key{background:#eef6e9;color:#4f8a46}
+#adminApp .verdict{font-family:var(--grotesk);font-weight:700;font-size:13px;margin-left:8px}
+#adminApp .v-ok{color:var(--ok)}
+#adminApp .v-no{color:var(--no)}
+#adminApp .openans{white-space:pre-wrap;background:#fff;border-left:3px solid var(--caramel);border-radius:0 8px 8px 0;padding:11px 14px;font-size:13.5px;margin-top:6px}
+#adminApp .opencc{font-size:11.5px;color:var(--muted);margin-top:5px}
+#adminApp .loading{padding:40px;text-align:center;color:var(--muted)}
+@media(max-width:720px){#adminApp .stats{grid-template-columns:repeat(2,1fr)}#adminApp .infogrid{grid-template-columns:1fr}}
+
+/* ===== merged: HR 后台覆盖层 ===== */
+#adminApp{display:contents}
+#adminApp #loginScreen{position:fixed;inset:0;z-index:1000;background:rgba(36,24,19,.55);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);overflow:auto}
+#adminApp #appScreen{position:fixed;inset:0;z-index:900;background:var(--paper);overflow:auto}
+#adminApp .login{position:relative}
+#adminApp .lg-close{position:absolute;top:12px;right:14px;background:transparent;border:none;font-size:24px;line-height:1;color:var(--muted);cursor:pointer}
+#adminApp .lg-close:hover{color:var(--ink)}
+
 </style>
 </head>
 <body>
@@ -402,7 +512,61 @@ textarea:focus{outline:none;border-color:var(--caramel);box-shadow:0 0 0 4px var
   </div>
 </section>
 
-<div class="foot">CHOCO 巧豆传媒 · 上海市黄浦区淡水路299号 SOHO复兴广场 A栋1501室　|　内部招聘测评 · 题目源自巧豆 SOP 与合规标准</div>
+<div class="foot">CHOCO 巧豆传媒 · 上海市黄浦区淡水路299号 SOHO复兴广场 A栋1501室　|　内部招聘测评 · 题目源自巧豆 SOP 与合规标准　|　<a href="javascript:void(0)" onclick="openLogin()" style="color:#bfae9f;text-decoration:underline">HR 登录后台</a></div>
+
+<div id="adminApp">
+<!-- ===== LOGIN ===== -->
+<div id="loginScreen" style="display:none">
+  <div class="login">
+    <button class="lg-close" onclick="closeLogin()" aria-label="关闭">×</button>
+    <div class="eyebrow">CHOCO Recruitment · Admin</div>
+    <h1>招聘测评后台</h1>
+    <p>请使用 HR 管理员账号登录,查看候选人答卷与自动评分。</p>
+    <label>邮箱</label>
+    <input id="lg-email" type="email" placeholder="hr@example.com" autocomplete="username">
+    <label>密码</label>
+    <input id="lg-pass" type="password" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+    <div class="err" id="lg-err"></div>
+    <button class="btn btn-amber" id="lg-btn" onclick="doLogin()">登录</button>
+    <div class="hint" id="cfgHint" style="display:none"></div>
+  </div>
+</div>
+
+<!-- ===== APP ===== -->
+<div id="appScreen" style="display:none">
+  <div class="topbar">
+    <div><span class="brand">CHOCO <b>·</b> 测评后台</span><span class="sub">候选人答卷与自动评分</span></div>
+    <div class="right">
+      <span class="sub" id="whoami"></span>
+      <button class="btn btn-ghost" onclick="loadSubmissions()">刷新</button>
+      <button class="btn btn-ghost" onclick="exportCSV()">导出 CSV</button>
+      <button class="btn btn-ghost" onclick="logout()">退出</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="stats" id="stats"></div>
+
+    <div class="toolbar">
+      <div class="chips" id="chips"></div>
+      <div class="search"><input id="searchBox" placeholder="搜索姓名 / 邮箱 / 手机…" oninput="renderTable()"></div>
+    </div>
+
+    <div class="tablecard">
+      <table>
+        <thead><tr>
+          <th>提交时间</th><th>姓名</th><th>应聘岗位</th><th>客观得分</th><th>开放题</th><th>联系方式</th>
+        </tr></thead>
+        <tbody id="rows"><tr><td colspan="6" class="loading">加载中…</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- detail drawer -->
+<div class="overlay" id="overlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer"><div id="drawerInner"></div></div>
+</div>
 
 <script>
 /* ============================================================
@@ -413,8 +577,10 @@ textarea:focus{outline:none;border-color:var(--caramel);box-shadow:0 0 0 4px var
 const CONFIG = {
   SUPABASE_URL: "https://iualygisuhahwdxsfmxe.supabase.co",
   SUPABASE_ANON_KEY: "sb_publishable_KvPZ4hC9go9qKAF2-ulZ0g_I1ilH1YG",
-  TABLE: "submissions"
+  TABLE: "submissions",
+  KEYS_TABLE: "answer_keys"
 };
+let KEYS=null;
 
 /* ============================================================
    QUESTION BANK — derived from Choco SOP / compliance whitepaper / credentials
@@ -853,6 +1019,239 @@ function downloadBackup(p){
 /* init */
 renderTracks();
 updateProgress("intro");
+
+/* =================== HR 后台(同页登录) =================== */
+
+/* ============================================================
+   AUTH
+============================================================ */
+let TOKEN=null, EMAIL=null, DATA=[], FILTER="all";
+function ssGet(k){try{return sessionStorage.getItem(k)}catch(e){return null}}
+function ssSet(k,v){try{sessionStorage.setItem(k,v)}catch(e){}}
+function ssDel(k){try{sessionStorage.removeItem(k)}catch(e){}}
+
+function showConfigHint(){
+  const h=document.getElementById("cfgHint");
+  h.style.display="block";
+  h.innerHTML="⚠️ 尚未配置后台。请在本文件顶部 <b>CONFIG</b> 中填入 Supabase 项目地址与 anon key,并在 Supabase 中建好数据表(见随附 SQL)。";
+}
+async function doLogin(){
+  const err=document.getElementById("lg-err"); err.textContent="";
+  if(!backendReady()){ showConfigHint(); return; }
+  const email=document.getElementById("lg-email").value.trim();
+  const pass=document.getElementById("lg-pass").value;
+  if(!email||!pass){ err.textContent="请输入邮箱与密码"; return; }
+  const btn=document.getElementById("lg-btn"); btn.disabled=true; btn.textContent="登录中…";
+  try{
+    const res=await fetch(`${CONFIG.SUPABASE_URL}/auth/v1/token?grant_type=password`,{
+      method:"POST",
+      headers:{"Content-Type":"application/json","apikey":CONFIG.SUPABASE_ANON_KEY},
+      body:JSON.stringify({email,password:pass})
+    });
+    const j=await res.json();
+    if(!res.ok || !j.access_token){ throw new Error(j.error_description||j.msg||"登录失败"); }
+    TOKEN=j.access_token; EMAIL=email;
+    ssSet("choco_token",TOKEN); ssSet("choco_email",email);
+    enterApp();
+  }catch(e){
+    err.textContent="登录失败:"+(e.message||"请检查邮箱密码")+"（如首次使用,请先在 Supabase 后台创建管理员用户）";
+    btn.disabled=false; btn.textContent="登录";
+  }
+}
+function logout(){ TOKEN=null; KEYS=null; ssDel("choco_token"); ssDel("choco_email");
+  document.getElementById("appScreen").style.display="none";
+  document.getElementById("loginScreen").style.display="none";
+}
+async function enterApp(){
+  document.getElementById("loginScreen").style.display="none";
+  document.getElementById("appScreen").style.display="block";
+  document.getElementById("whoami").textContent=EMAIL||"";
+  buildChips();
+  await loadKeys();
+  loadSubmissions();
+}
+function openLogin(){
+  if(TOKEN){ enterApp(); return; }
+  document.getElementById("loginScreen").style.display="block";
+  setTimeout(()=>{const e=document.getElementById("lg-email"); if(e) e.focus();},60);
+}
+function closeLogin(){ document.getElementById("loginScreen").style.display="none"; }
+async function loadKeys(){
+  try{
+    const res=await fetch(`${CONFIG.SUPABASE_URL}/rest/v1/${CONFIG.KEYS_TABLE}?select=position,keys`,{
+      headers:{"apikey":CONFIG.SUPABASE_ANON_KEY,"Authorization":"Bearer "+TOKEN}
+    });
+    if(res.status===401){ logout(); return false; }
+    if(!res.ok) throw new Error("HTTP "+res.status+" "+await res.text());
+    const rows=await res.json(); KEYS={}; rows.forEach(x=>{ KEYS[x.position]=x.keys; });
+    return true;
+  }catch(e){ console.error("loadKeys",e); if(!KEYS) KEYS={}; return false; }
+}
+
+/* ============================================================
+   LOAD + SCORE
+============================================================ */
+async function loadSubmissions(){
+  const tb=document.getElementById("rows");
+  tb.innerHTML='<tr><td colspan="6" class="loading">加载中…</td></tr>';
+  if(!KEYS){ await loadKeys(); }
+  try{
+    const res=await fetch(`${CONFIG.SUPABASE_URL}/rest/v1/${CONFIG.TABLE}?select=*&order=created_at.desc`,{
+      headers:{"apikey":CONFIG.SUPABASE_ANON_KEY,"Authorization":"Bearer "+TOKEN}
+    });
+    if(res.status===401){ logout(); return; }
+    if(!res.ok){ throw new Error("HTTP "+res.status+" "+await res.text()); }
+    DATA=await res.json();
+    DATA.forEach(r=>{ r._score=scoreOf(r); });
+    renderStats(); renderTable();
+  }catch(e){
+    tb.innerHTML=`<tr><td colspan="6" class="empty">读取失败：${escapeHtml(e.message)}</td></tr>`;
+  }
+}
+function scoreOf(r){
+  const p=POSITIONS[r.position]; if(!p) return {obj:0,total:0,pct:0,open:0,items:[]};
+  const km=(KEYS&&KEYS[r.position])||{};
+  let qn=0,objTotal=0,objCorrect=0,openCount=0; const items=[]; const ans=r.answers||{};
+  p.sections.forEach(sec=>sec.q.forEach(q=>{
+    qn++; const id="q"+qn; const v=ans[id];
+    const it={n:qn,sec:sec.t,type:q.type,t:q.t,o:q.o||null};
+    if(q.type==="open"){ openCount++; it.text=(typeof v==="string")?v:""; }
+    else{
+      objTotal++; const key=km[id];
+      if(q.type==="multi"){
+        const a=Array.isArray(v)?v.slice().sort((x,y)=>x-y):[];
+        const k=Array.isArray(key)?key.slice().sort((x,y)=>x-y):[];
+        it.correct=a.length===k.length && a.every((x,i)=>x===k[i]); it.your=a; it.key=k;
+      }else{ it.correct=(v===key); it.your=(v==null?null:v); it.key=key; }
+      if(it.correct) objCorrect++;
+    }
+    items.push(it);
+  }));
+  return {obj:objCorrect,total:objTotal,pct:objTotal?Math.round(objCorrect/objTotal*100):0,open:openCount,items};
+}
+
+/* ============================================================
+   RENDER
+============================================================ */
+const POSLABEL={base:"基础项目执行岗",pr:"艺人 PR 项目管理岗",creative:"创意策划管理岗"};
+const POSCLASS={base:"pos-base",pr:"pos-pr",creative:"pos-creative"};
+function buildChips(){
+  const defs=[["all","全部"],["base","基础执行"],["pr","艺人 PR"],["creative","创意策划"]];
+  document.getElementById("chips").innerHTML=defs.map(([k,l])=>
+    `<div class="chip ${k===FILTER?'on':''}" onclick="setFilter('${k}')">${l}</div>`).join("");
+}
+function setFilter(k){ FILTER=k; buildChips(); renderTable(); }
+function renderStats(){
+  const by={base:0,pr:0,creative:0};
+  DATA.forEach(r=>{ if(by[r.position]!=null) by[r.position]++; });
+  const s=document.getElementById("stats");
+  s.innerHTML=`
+    <div class="stat"><div class="n num">${DATA.length}</div><div class="l">总答卷数</div></div>
+    <div class="stat"><div class="n num">${by.base}</div><div class="l">基础项目执行岗</div></div>
+    <div class="stat"><div class="n num">${by.pr}</div><div class="l">艺人 PR 项目管理岗</div></div>
+    <div class="stat"><div class="n num">${by.creative}</div><div class="l">创意策划管理岗</div></div>`;
+}
+function fmtTime(s){ if(!s) return "—"; const d=new Date(s);
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")} ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`; }
+function renderTable(){
+  const kw=document.getElementById("searchBox").value.trim().toLowerCase();
+  let list=DATA.filter(r=>FILTER==="all"||r.position===FILTER);
+  if(kw){ list=list.filter(r=>((r.name||"")+(r.email||"")+(r.phone||"")).toLowerCase().includes(kw)); }
+  const tb=document.getElementById("rows");
+  if(!list.length){ tb.innerHTML='<tr><td colspan="6" class="empty">暂无符合条件的答卷</td></tr>'; return; }
+  tb.innerHTML=list.map((r)=>{
+    const sc=r._score; const idx=DATA.indexOf(r);
+    return `<tr onclick="openDrawer(${idx})">
+      <td class="num muted">${fmtTime(r.created_at)}</td>
+      <td><b>${escapeHtml(r.name||"—")}</b></td>
+      <td><span class="posbadge ${POSCLASS[r.position]||''}">${escapeHtml(r.position_name||POSLABEL[r.position]||r.position)}</span></td>
+      <td><span class="score">${sc.obj}/${sc.total}</span> <span class="muted num">(${sc.pct}%)</span>
+          <div class="bar"><i style="width:${sc.pct}%"></i></div></td>
+      <td class="num">${sc.open} 题</td>
+      <td class="muted" style="font-size:12.5px">${escapeHtml(r.phone||"")}<br>${escapeHtml(r.email||"")}</td>
+    </tr>`;
+  }).join("");
+}
+
+/* ---- detail drawer ---- */
+function openDrawer(idx){
+  const r=DATA[idx]; const sc=r._score;
+  const objItems=sc.items.filter(i=>i.type!=="open");
+  const openItems=sc.items.filter(i=>i.type==="open");
+  const letter=i=>String.fromCharCode(65+i);
+  const objHtml=objItems.map(it=>{
+    const opts=(it.o||[]).map((o,i)=>{
+      const isYour = it.type==="multi" ? (it.your||[]).includes(i) : it.your===i;
+      const isKey  = it.type==="multi" ? (it.key||[]).includes(i)  : it.key===i;
+      let tags="";
+      if(isYour) tags+=`<span class="tag tag-your">候选人</span>`;
+      if(isKey)  tags+=`<span class="tag tag-key">正确</span>`;
+      return `<div class="opt ${isYour||isKey?'pick':''}">${letter(i)}. ${escapeHtml(o)}${tags}</div>`;
+    }).join("");
+    return `<div class="qrow">
+      <div class="qt">${it.n}. ${escapeHtml(it.t)} <span class="verdict ${it.correct?'v-ok':'v-no'}">${it.correct?'✓':'✕'}</span></div>
+      ${opts}</div>`;
+  }).join("");
+  const openHtml=openItems.map(it=>`
+    <div class="qrow">
+      <div class="qt">${it.n}. ${escapeHtml(it.t)}</div>
+      <div class="openans">${it.text?escapeHtml(it.text):'<span class="muted">（未作答）</span>'}</div>
+      <div class="opencc">字数：${(it.text||"").length} ｜ 开放题需人工评阅,重点看逻辑结构、岗位理解与执行细节</div>
+    </div>`).join("");
+  document.getElementById("drawerInner").innerHTML=`
+    <div class="dhead">
+      <div><h2>${escapeHtml(r.name||"—")}</h2>
+        <div class="meta">${escapeHtml(r.position_name||POSLABEL[r.position]||"")} ｜ 提交于 ${fmtTime(r.created_at)}</div></div>
+      <button class="dclose" onclick="closeDrawer()">×</button>
+    </div>
+    <div class="dbody">
+      <div class="infogrid">
+        <div><div class="k">手机 / 联系方式</div>${escapeHtml(r.phone||"—")}</div>
+        <div><div class="k">邮箱</div>${escapeHtml(r.email||"—")}</div>
+        <div><div class="k">应聘岗位</div>${escapeHtml(r.position_name||"—")}</div>
+        <div><div class="k">作答总题数</div>${r.total||sc.items.length} 题</div>
+      </div>
+      <div class="scorebox">
+        <div class="b"><div class="big num">${sc.obj}/${sc.total}</div><div class="lab">客观题答对</div></div>
+        <div class="b"><div class="big num">${sc.pct}%</div><div class="lab">客观正确率</div></div>
+        <div class="b"><div class="big num">${sc.open}</div><div class="lab">开放题（待评阅）</div></div>
+      </div>
+      <div class="secttl">客观题作答明细</div>
+      ${objHtml||'<div class="muted">无客观题</div>'}
+      <div class="secttl">开放论述题（人工评阅）</div>
+      ${openHtml||'<div class="muted">无开放题</div>'}
+    </div>`;
+  document.getElementById("overlay").classList.add("show");
+  document.getElementById("drawer").classList.add("show");
+}
+function closeDrawer(){
+  document.getElementById("overlay").classList.remove("show");
+  document.getElementById("drawer").classList.remove("show");
+}
+
+/* ---- CSV export (objective summary) ---- */
+function exportCSV(){
+  let list=DATA.filter(r=>FILTER==="all"||r.position===FILTER);
+  const head=["提交时间","姓名","手机","邮箱","应聘岗位","客观答对","客观题数","正确率%","开放题数"];
+  const rows=list.map(r=>{ const s=r._score; return [
+    fmtTime(r.created_at), r.name||"", r.phone||"", r.email||"",
+    r.position_name||r.position||"", s.obj, s.total, s.pct, s.open
+  ];});
+  const csv=[head,...rows].map(row=>row.map(c=>{
+    const v=String(c==null?"":c); return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;
+  }).join(",")).join("\n");
+  const blob=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"});
+  const url=URL.createObjectURL(blob); const a=document.createElement("a");
+  a.href=url; a.download=`巧豆测评汇总_${new Date().toISOString().slice(0,10)}.csv`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url),1500);
+}
+
+function escapeHtml(s){return (s==null?"":String(s)).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+/* ---- 后台:仅恢复登录态变量,不自动进入(候选人不会被打扰) ---- */
+(function admInit(){ const t=ssGet("choco_token"); if(t){ TOKEN=t; EMAIL=ssGet("choco_email"); } })();
+
 </script>
 </body>
 </html>
