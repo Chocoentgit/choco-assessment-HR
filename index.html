@@ -378,6 +378,8 @@ textarea:focus{outline:none;border-color:var(--caramel);box-shadow:0 0 0 4px var
 #adminApp{display:contents}
 #adminApp #loginScreen{position:fixed;inset:0;z-index:1000;background:rgba(36,24,19,.55);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);overflow:auto}
 #adminApp #appScreen{position:fixed;inset:0;z-index:900;background:var(--paper);overflow:auto}
+#adminApp #overlay{z-index:1040}
+#adminApp #drawer{z-index:1050}
 #adminApp .login{position:relative}
 #adminApp .lg-close{position:absolute;top:12px;right:14px;background:transparent;border:none;font-size:24px;line-height:1;color:var(--muted);cursor:pointer}
 #adminApp .lg-close:hover{color:var(--ink)}
@@ -552,6 +554,7 @@ textarea:focus{outline:none;border-color:var(--caramel);box-shadow:0 0 0 4px var
       <div class="search"><input id="searchBox" placeholder="搜索姓名 / 邮箱 / 手机…" oninput="renderTable()"></div>
     </div>
 
+    <div style="font-size:12.5px;color:var(--muted);margin:0 2px 9px">提示:点击任意一行,可在右侧查看该候选人的<b>完整答卷</b>(逐题作答 vs 正确答案、开放题全文)。</div>
     <div class="tablecard">
       <table>
         <thead><tr>
