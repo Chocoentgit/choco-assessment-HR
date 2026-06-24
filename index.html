@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHOCO 巧豆传媒 · 岗位胜任力测评</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#241813;
+  --cocoa:#3a241a;
+  --paper:#fbf7f0;
+  --paper-2:#f4ead9;
+  --card:#fffdfa;
+  --caramel:#c8772e;
+  --caramel-deep:#a85e1f;
+  --caramel-soft:#f6e7d3;
+  --plum:#7a2e48;
+  --line:#e7dccb;
+  --line-2:#efe6d6;
+  --muted:#8a7a6a;
+  --muted-2:#b3a797;
+  --good:#5c8a4a;
+  --warn:#c0492b;
+  --shadow:0 1px 2px rgba(36,24,19,.04),0 12px 32px -12px rgba(36,24,19,.16);
+  --shadow-sm:0 1px 2px rgba(36,24,19,.05),0 6px 16px -10px rgba(36,24,19,.14);
+  --grotesk:"Space Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --cjk:"PingFang SC","Microsoft YaHei","Hiragino Sans GB","Source Han Sans SC","Noto Sans CJK SC",sans-serif;
+  --body:var(--grotesk),var(--cjk);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:var(--body);
+  color:var(--ink);
+  background:
+    radial-gradient(1200px 600px at 88% -8%, #f7ead6 0%, rgba(247,234,214,0) 55%),
+    radial-gradient(900px 500px at -5% 8%, #f3e3cd 0%, rgba(243,227,205,0) 50%),
+    var(--paper);
+  background-attachment:fixed;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  font-size:16px;
+}
+.wrap{max-width:880px;margin:0 auto;padding:0 22px}
+
+/* ---------- top progress spine ---------- */
+.topbar{position:sticky;top:0;z-index:40;backdrop-filter:saturate(140%) blur(8px);
+  background:rgba(251,247,240,.82);border-bottom:1px solid var(--line-2)}
+.topbar-inner{max-width:880px;margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--grotesk);font-weight:700;
+  letter-spacing:.04em;font-size:15px;color:var(--ink);white-space:nowrap}
+.brand .dot{width:11px;height:11px;border-radius:50%;background:var(--caramel);
+  box-shadow:0 0 0 3px var(--caramel-soft)}
+.brand small{font-family:var(--cjk);font-weight:500;color:var(--muted);font-size:12.5px;letter-spacing:0}
+.progress-track{flex:1;height:5px;border-radius:99px;background:var(--line);overflow:hidden;min-width:60px}
+.progress-fill{height:100%;width:0;border-radius:99px;
+  background:linear-gradient(90deg,var(--caramel),var(--caramel-deep));transition:width .45s cubic-bezier(.4,0,.2,1)}
+.progress-label{font-family:var(--grotesk);font-size:12.5px;color:var(--muted);white-space:nowrap;
+  min-width:38px;text-align:right;font-variant-numeric:tabular-nums}
+
+.screen{display:none;animation:fade .5s ease both}
+.screen.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ---------- hero / intro ---------- */
+.hero{padding:64px 0 30px}
+.eyebrow{font-family:var(--grotesk);font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  font-size:11.5px;color:var(--caramel-deep);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:30px;height:1.5px;background:var(--caramel)}
+.hero h1{font-family:var(--cjk);font-weight:700;font-size:clamp(30px,6vw,52px);line-height:1.12;
+  margin:0 0 6px;letter-spacing:-.01em}
+.hero h1 .en{font-family:var(--grotesk);display:block;font-size:clamp(15px,2.4vw,19px);font-weight:500;
+  letter-spacing:.04em;color:var(--muted);margin-top:14px}
+.hero .lede{font-family:var(--cjk);font-size:16.5px;color:var(--cocoa);max-width:600px;margin:22px 0 0}
+.hero .lede b{color:var(--caramel-deep);font-weight:600}
+
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:38px 0 8px}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px 16px;box-shadow:var(--shadow-sm)}
+.fact .n{font-family:var(--grotesk);font-weight:700;font-size:26px;color:var(--caramel);line-height:1;
+  font-variant-numeric:tabular-nums}
+.fact .t{font-family:var(--cjk);font-size:13px;color:var(--muted);margin-top:9px}
+
+.note{margin:30px 0 6px;padding:18px 20px;border-radius:16px;background:var(--caramel-soft);
+  border:1px solid #ecd6b6}
+.note h4{font-family:var(--cjk);margin:0 0 8px;font-size:14.5px;color:var(--cocoa);font-weight:700}
+.note ul{margin:0;padding-left:18px;font-family:var(--cjk);font-size:13.7px;color:var(--cocoa)}
+.note li{margin:4px 0}
+.note b{color:var(--caramel-deep)}
+
+/* ---------- buttons ---------- */
+.btn{font-family:var(--grotesk);font-weight:600;font-size:15px;border:none;cursor:pointer;
+  border-radius:13px;padding:15px 28px;display:inline-flex;align-items:center;gap:10px;transition:.18s;
+  letter-spacing:.01em}
+.btn .cjk{font-family:var(--cjk);font-weight:600}
+.btn-primary{background:var(--ink);color:#fff;box-shadow:0 10px 24px -10px rgba(36,24,19,.5)}
+.btn-primary:hover{background:#3a241a;transform:translateY(-2px)}
+.btn-primary:active{transform:translateY(0)}
+.btn-ghost{background:transparent;color:var(--cocoa);border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--caramel);color:var(--caramel-deep);background:#fff}
+.btn-amber{background:var(--caramel);color:#fff;box-shadow:0 10px 24px -12px rgba(200,119,46,.7)}
+.btn-amber:hover{background:var(--caramel-deep);transform:translateY(-2px)}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none!important}
+.btn-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:34px}
+.arrow{font-family:var(--grotesk)}
+
+/* ---------- form (step 1) ---------- */
+.section-head{margin:46px 0 22px}
+.section-head .k{font-family:var(--grotesk);font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  font-size:11px;color:var(--caramel-deep)}
+.section-head h2{font-family:var(--cjk);font-size:25px;margin:9px 0 6px;font-weight:700;letter-spacing:-.01em}
+.section-head p{font-family:var(--cjk);color:var(--muted);font-size:14px;margin:0}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field.full{grid-column:1/-1}
+.field label{font-family:var(--cjk);font-size:13.5px;color:var(--cocoa);font-weight:600}
+.field label .req{color:var(--caramel)}
+.field label .opt{color:var(--muted-2);font-weight:500;font-size:12px}
+.field input{font-family:var(--body);font-size:15px;padding:13px 15px;border-radius:12px;
+  border:1.5px solid var(--line);background:var(--card);color:var(--ink);transition:.16s;width:100%}
+.field input::placeholder{color:var(--muted-2)}
+.field input:focus{outline:none;border-color:var(--caramel);box-shadow:0 0 0 4px var(--caramel-soft)}
+.field input.err{border-color:var(--warn);box-shadow:0 0 0 4px rgba(192,73,43,.1)}
+.err-msg{font-family:var(--cjk);font-size:12px;color:var(--warn);min-height:0}
+
+/* ---------- position cards ---------- */
+.tracks{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+.track{position:relative;display:flex;gap:18px;align-items:flex-start;background:var(--card);
+  border:1.5px solid var(--line);border-radius:18px;padding:22px 22px 22px 20px;cursor:pointer;transition:.2s;
+  box-shadow:var(--shadow-sm)}
+.track:hover{border-color:var(--caramel);transform:translateY(-2px)}
+.track.sel{border-color:var(--caramel);background:linear-gradient(180deg,#fff,var(--caramel-soft));
+  box-shadow:0 12px 30px -14px rgba(200,119,46,.5)}
+.track .lvl{flex:none;width:54px}
+.track .lvl .badge{font-family:var(--grotesk);font-weight:700;font-size:11px;letter-spacing:.06em;
+  color:#fff;background:var(--muted-2);border-radius:8px;padding:5px 0;text-align:center;display:block}
+.track.sel .lvl .badge,.track:hover .lvl .badge{background:var(--caramel)}
+.track .lvl .step{font-family:var(--grotesk);font-weight:700;font-size:30px;color:var(--line);
+  text-align:center;margin-top:8px;line-height:1}
+.track.sel .lvl .step{color:var(--caramel)}
+.track .body h3{font-family:var(--cjk);font-size:18px;margin:0 0 5px;font-weight:700}
+.track .body .role{font-family:var(--grotesk);font-size:12px;color:var(--caramel-deep);letter-spacing:.04em;
+  font-weight:600;margin-bottom:9px}
+.track .body p{font-family:var(--cjk);font-size:13.6px;color:var(--muted);margin:0}
+.track .body .tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
+.track .body .tags span{font-family:var(--cjk);font-size:11.5px;color:var(--cocoa);background:var(--paper-2);
+  border:1px solid var(--line);border-radius:99px;padding:3px 10px}
+.track .check{position:absolute;top:18px;right:18px;width:24px;height:24px;border-radius:50%;
+  border:2px solid var(--line);display:flex;align-items:center;justify-content:center;transition:.18s}
+.track.sel .check{border-color:var(--caramel);background:var(--caramel)}
+.track .check svg{opacity:0;transform:scale(.5);transition:.18s}
+.track.sel .check svg{opacity:1;transform:scale(1)}
+
+/* ---------- questions ---------- */
+.q-intro{padding:38px 0 6px}
+.q-intro .pill{display:inline-flex;align-items:center;gap:9px;font-family:var(--grotesk);font-size:12.5px;
+  font-weight:600;color:var(--caramel-deep);background:var(--caramel-soft);border:1px solid #ecd6b6;
+  border-radius:99px;padding:7px 15px;letter-spacing:.03em}
+.q-intro h2{font-family:var(--cjk);font-size:27px;margin:18px 0 8px;font-weight:700}
+.q-intro p{font-family:var(--cjk);color:var(--muted);font-size:14px;margin:0;max-width:560px}
+
+.qsection{margin:40px 0 0}
+.qsection-bar{display:flex;align-items:baseline;gap:14px;margin:0 0 4px;padding-bottom:12px;
+  border-bottom:2px solid var(--ink)}
+.qsection-bar .idx{font-family:var(--grotesk);font-weight:700;font-size:13px;color:var(--caramel);
+  letter-spacing:.1em}
+.qsection-bar h3{font-family:var(--cjk);font-size:17px;margin:0;font-weight:700;flex:1}
+.qsection-bar .cnt{font-family:var(--grotesk);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+.q{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:22px 22px 20px;
+  margin-top:14px;box-shadow:var(--shadow-sm);scroll-margin-top:90px;transition:border-color .2s}
+.q.answered{border-color:#dcd0bd}
+.q.flag{border-color:var(--warn);box-shadow:0 0 0 3px rgba(192,73,43,.08)}
+.q-top{display:flex;gap:13px;align-items:flex-start;margin-bottom:16px}
+.q-num{font-family:var(--grotesk);font-weight:700;font-size:14px;color:#fff;background:var(--ink);
+  border-radius:9px;min-width:30px;height:30px;display:flex;align-items:center;justify-content:center;
+  flex:none;font-variant-numeric:tabular-nums}
+.q.answered .q-num{background:var(--caramel)}
+.q-text{font-family:var(--cjk);font-size:16px;font-weight:600;color:var(--ink);line-height:1.55}
+.q-type{font-family:var(--grotesk);font-size:10.5px;font-weight:600;letter-spacing:.08em;color:var(--muted);
+  border:1px solid var(--line);border-radius:6px;padding:2px 7px;margin-left:8px;white-space:nowrap;
+  vertical-align:middle;display:inline-block}
+.q-type.multi{color:var(--caramel-deep);border-color:#ecd6b6;background:var(--caramel-soft)}
+.q-type.open{color:var(--plum);border-color:#e6c8d2;background:#f7e7ec}
+
+.opts{display:flex;flex-direction:column;gap:9px}
+.opt{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:12px;
+  border:1.5px solid var(--line-2);cursor:pointer;transition:.14s;background:#fff;font-family:var(--cjk)}
+.opt:hover{border-color:var(--caramel);background:#fffdf9}
+.opt.on{border-color:var(--caramel);background:var(--caramel-soft)}
+.opt .mark{flex:none;width:21px;height:21px;border:2px solid var(--muted-2);display:flex;
+  align-items:center;justify-content:center;margin-top:1px;transition:.14s;color:#fff}
+.opt.single .mark{border-radius:50%}
+.opt.multi .mark{border-radius:6px}
+.opt.on .mark{border-color:var(--caramel);background:var(--caramel)}
+.opt .mark svg{opacity:0;transform:scale(.4);transition:.14s}
+.opt.on .mark svg{opacity:1;transform:scale(1)}
+.opt .letter{font-family:var(--grotesk);font-weight:700;color:var(--caramel-deep);font-size:14px;flex:none;
+  width:16px}
+.opt .txt{font-size:14.6px;color:var(--cocoa);flex:1}
+.opt.on .txt{color:var(--ink)}
+
+.open-wrap{margin-top:2px}
+textarea{font-family:var(--cjk);font-size:14.8px;line-height:1.7;padding:15px;border-radius:13px;
+  border:1.5px solid var(--line);background:#fff;width:100%;min-height:160px;resize:vertical;color:var(--ink);
+  transition:.16s}
+textarea:focus{outline:none;border-color:var(--caramel);box-shadow:0 0 0 4px var(--caramel-soft)}
+.open-meta{display:flex;justify-content:space-between;margin-top:8px;font-family:var(--cjk);font-size:12px;
+  color:var(--muted)}
+.open-meta .cc.ok{color:var(--good);font-weight:600}
+.open-hint{font-family:var(--cjk);font-size:12.5px;color:var(--muted);background:var(--paper-2);
+  border-radius:10px;padding:10px 13px;margin-bottom:12px;border:1px solid var(--line)}
+.open-hint b{color:var(--cocoa)}
+
+/* submit bar */
+.submit-block{margin:46px 0 80px;padding:28px;border-radius:20px;background:var(--ink);color:#fff;
+  text-align:center}
+.submit-block h3{font-family:var(--cjk);font-size:20px;margin:0 0 8px;font-weight:700;color:#fff}
+.submit-block p{font-family:var(--cjk);font-size:14px;color:#d8c9bb;margin:0 0 8px}
+.submit-block .remain{font-family:var(--grotesk);color:var(--caramel);font-weight:700;
+  font-variant-numeric:tabular-nums}
+.submit-block .btn-row{justify-content:center;margin-top:22px}
+
+.floating{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(251,247,240,.92);
+  backdrop-filter:blur(8px);border-top:1px solid var(--line);transform:translateY(120%);
+  transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.floating.show{transform:translateY(0)}
+.floating-inner{max-width:880px;margin:0 auto;padding:13px 22px;display:flex;align-items:center;
+  justify-content:space-between;gap:16px}
+.floating .stat{font-family:var(--cjk);font-size:13.5px;color:var(--cocoa)}
+.floating .stat b{font-family:var(--grotesk);color:var(--caramel-deep);font-variant-numeric:tabular-nums}
+
+/* ---------- done ---------- */
+.done{padding:70px 0 90px;text-align:center}
+.done .mark-big{width:84px;height:84px;border-radius:50%;background:var(--caramel-soft);
+  border:2px solid var(--caramel);display:flex;align-items:center;justify-content:center;margin:0 auto 26px}
+.done h1{font-family:var(--cjk);font-size:32px;margin:0 0 12px;font-weight:700}
+.done .en{font-family:var(--grotesk);letter-spacing:.16em;text-transform:uppercase;font-size:12px;
+  color:var(--caramel-deep);font-weight:600;margin-bottom:18px}
+.done p{font-family:var(--cjk);color:var(--cocoa);font-size:15.5px;max-width:520px;margin:0 auto 8px}
+.summary{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;max-width:520px;
+  margin:34px auto 0;text-align:left;box-shadow:var(--shadow-sm)}
+.summary .row{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px dashed var(--line);
+  font-family:var(--cjk);font-size:14px}
+.summary .row:last-child{border-bottom:none}
+.summary .row span:first-child{color:var(--muted)}
+.summary .row span:last-child{color:var(--ink);font-weight:600;text-align:right}
+.done .btn-row{justify-content:center;margin-top:32px}
+.fineprint{font-family:var(--cjk);font-size:12.5px;color:var(--muted-2);margin-top:26px}
+
+.foot{padding:30px 0 50px;text-align:center;font-family:var(--cjk);font-size:12.5px;color:var(--muted-2);
+  border-top:1px solid var(--line-2);margin-top:30px}
+
+@media(max-width:680px){
+  .grid-2{grid-template-columns:1fr}
+  .facts{grid-template-columns:1fr;gap:10px}
+  .fact{display:flex;align-items:baseline;gap:14px;padding:14px 18px}
+  .fact .t{margin-top:0}
+  .hero{padding:42px 0 20px}
+  .track{padding:18px}
+  .track .lvl{width:46px}
+  .track .lvl .step{font-size:24px}
+  .btn{width:100%;justify-content:center}
+  .btn-row .btn{width:100%}
+  .floating-inner .btn{width:auto}
+}
+@media print{
+  .topbar,.floating,.btn-row,.foot{display:none!important}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><span class="dot"></span>CHOCO <small>巧豆传媒 · 胜任力测评</small></div>
+    <div class="progress-track"><div class="progress-fill" id="pbar"></div></div>
+    <div class="progress-label" id="plabel">开始</div>
+  </div>
+</div>
+
+<!-- ============ STEP 0 : INTRO ============ -->
+<section class="screen active" id="screen-intro">
+  <div class="wrap">
+    <div class="hero">
+      <div class="eyebrow">Recruitment Assessment</div>
+      <h1>岗位胜任力测评
+        <span class="en">Find your track at CHOCO — let us choco your brand.</span>
+      </h1>
+      <p class="lede">欢迎来到 <b>CHOCO 巧豆传媒</b>。我们是一家全域品牌内容增长创意型公司,专注品牌咨询、艺人管理、内容营销与创意制作。这份测评用于了解你与<b>目标岗位</b>的匹配度——题目均源自巧豆真实的工作 SOP 与合规标准,没有标准的"套路答案",我们更想看到你的判断与表达。</p>
+
+      <div class="note">
+        <h4>作答须知</h4>
+        <ul>
+          <li>请先填写<b>个人信息</b>并<b>选择应聘岗位</b>,系统会展示该岗位对应的题目。</li>
+          <li>题型包含<b>单选、多选、判断与开放论述</b>;多选题请选全所有正确项。</li>
+          <li>开放题没有唯一答案,请结合你的经验与对岗位的理解,<b>有逻辑、有细节</b>地展开。</li>
+          <li>页面作答<b>不会自动保存</b>,请尽量一次性完成;<b>提交后将直接送达 HR 后台</b>,无需下载或发送文件。</li>
+        </ul>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="go('info')"><span class="cjk">开始测评</span> <span class="arrow">→</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STEP 1 : INFO + POSITION ============ -->
+<section class="screen" id="screen-info">
+  <div class="wrap">
+    <div class="section-head" style="margin-top:48px">
+      <div class="k">Step 01 — About you</div>
+      <h2>个人信息</h2>
+      <p>用于 HR 与你联系,请填写真实有效的信息。<span style="color:var(--caramel-deep)">*</span> 为必填。</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="field">
+        <label>姓名 <span class="req">*</span></label>
+        <input id="f-name" type="text" placeholder="你的姓名">
+        <div class="err-msg" id="e-name"></div>
+      </div>
+      <div class="field">
+        <label>手机 / 联系方式 <span class="req">*</span></label>
+        <input id="f-phone" type="tel" placeholder="如 138 0000 0000" inputmode="tel">
+        <div class="err-msg" id="e-phone"></div>
+      </div>
+      <div class="field">
+        <label>邮箱 <span class="req">*</span></label>
+        <input id="f-email" type="email" placeholder="name@example.com" inputmode="email">
+        <div class="err-msg" id="e-email"></div>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <div class="k">Step 01 — Choose your track</div>
+      <h2>选择应聘岗位</h2>
+      <p>选定后将进入该岗位专属题目。每个岗位考察的能力维度不同。</p>
+    </div>
+
+    <div class="tracks" id="tracks"></div>
+    <div class="err-msg" id="e-track" style="margin-top:10px"></div>
+
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="go('intro')"><span class="arrow">←</span> <span class="cjk">返回</span></button>
+      <button class="btn btn-amber" id="toQuestions" onclick="startQuestions()"><span class="cjk">进入测评题目</span> <span class="arrow">→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STEP 2 : QUESTIONS ============ -->
+<section class="screen" id="screen-q">
+  <div class="wrap">
+    <div class="q-intro">
+      <span class="pill" id="q-pill">● 岗位</span>
+      <h2 id="q-title">岗位测评题目</h2>
+      <p id="q-sub"></p>
+    </div>
+    <div id="qbody"></div>
+
+    <div class="submit-block">
+      <h3>确认提交</h3>
+      <p>提交前请确认信息无误。仍有 <span class="remain" id="remainCount">0</span> 题待作答。</p>
+      <p style="font-size:13px;color:#bfae9f">提交后将无法修改,请仔细检查开放题的表达。</p>
+      <div class="btn-row">
+        <button class="btn btn-ghost" style="color:#f3e7d9;border-color:#5a4334" onclick="go('info');scrollTop()"><span class="arrow">←</span> <span class="cjk">返回修改信息</span></button>
+        <button class="btn btn-amber" id="submitBtn" onclick="submitTest()"><span class="cjk">提交测评</span> <span class="arrow">✓</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- floating progress -->
+<div class="floating" id="floating">
+  <div class="floating-inner">
+    <div class="stat">已作答 <b id="fAnswered">0</b> / <b id="fTotal">0</b> 题<span id="fOpen"></span></div>
+    <button class="btn btn-amber" style="padding:11px 22px;font-size:14px" onclick="jumpSubmit()"><span class="cjk">去提交</span> ↓</button>
+  </div>
+</div>
+
+<!-- ============ STEP 3 : DONE ============ -->
+<section class="screen" id="screen-done">
+  <div class="wrap">
+    <div class="done">
+      <div class="mark-big">
+        <svg width="38" height="38" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#c8772e" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="en">Submission received</div>
+      <h1>测评已提交,感谢你的作答</h1>
+      <p>你的回答已成功送达 CHOCO 巧豆传媒招聘后台。HR 团队会结合你的客观题表现与开放题思路进行综合评估,后续将通过你预留的联系方式与你沟通。</p>
+
+      <div class="summary" id="summary"></div>
+
+      <p class="fineprint">本测评为标准化初筛工具,最终以综合评估为准。如需补充材料(作品集 / 简历),可直接回复 HR 的联系邮件。</p>
+    </div>
+  </div>
+</section>
+
+<div class="foot">CHOCO 巧豆传媒 · 上海市黄浦区淡水路299号 SOHO复兴广场 A栋1501室　|　内部招聘测评 · 题目源自巧豆 SOP 与合规标准</div>
+
+<script>
+/* ============================================================
+   后台配置 / BACKEND CONFIG
+   将下面两行替换为你的 Supabase 项目信息。SUPABASE_ANON_KEY 填「Publishable key(sb_publishable_…)」或旧版「anon key」均可(都可公开)。
+   未填写时,提交会自动转为「下载备份文件」模式,数据不会丢失。
+============================================================ */
+const CONFIG = {
+  SUPABASE_URL: "https://iualygisuhahwdxsfmxe.supabase.co",
+  SUPABASE_ANON_KEY: "sb_publishable_KvPZ4hC9go9qKAF2-ulZ0g_I1ilH1YG",
+  TABLE: "submissions"
+};
+
+/* ============================================================
+   QUESTION BANK — derived from Choco SOP / compliance whitepaper / credentials
+   type: single(单选) | multi(多选) | judge(判断) | open(开放)
+   a = correct answer: index(single/judge as 0=正确/1=错误) or [idx](multi)
+============================================================ */
+const POSITIONS = {
+  base:{
+    name:"基础项目执行岗",
+    role:"Account Executive · AE",
+    level:"初级",
+    step:"01",
+    desc:"适配初级求职者。负责把项目执行落到实处:需求拆解、进度跟进、跨方沟通与基础合规。考察对岗位、工具、沟通与基础规范的掌握。",
+    tags:["岗位基础","办公/AI工具","沟通规范","基础合规","综艺执行基础"],
+    sub:"该岗位含「基础层级板块」,题目按板块分组,逐项检验你的执行底层能力。",
+    sections:[
+      {t:"板块一 · Account 岗位基础认知", q:[
+        {type:"single",t:"在广告行业,对 Account(阿康)最准确的定位是?",o:["客户需求的“传话筒”,负责转达即可","连接客户与公司内部资源的“枢纽”,是项目管理与客户关系的负责人","只对接艺人、不接触品牌的角色","负责开发票和报销的行政人员"]},
+        {type:"single",t:"Account 的成长路径(由低到高)正确顺序是?",o:["AM → AE → AD","AE → AM → AD","AD → AM → AE","AE → AD → AM"]},
+        {type:"multi",t:"作为 AE,以下哪些属于阿康的核心职业品质 / 能力?",o:["责任心、抗压能力","学习能力、保密意识","逻辑能力、共情能力、沟通能力","借助 AI 工具提效,同时严控内容合规"]},
+        {type:"single",t:"新人常犯的错误之一是“过度迎合客户”。面对客户超出预算的不合理执行要求,正确做法是?",o:["不敢拒绝,直接答应,先接下来再说","用专业数据支撑立场,提出替代方案","直接生硬回复“做不了”","把问题甩给内部团队自行处理"]},
+        {type:"judge",t:"判断:项目效果好坏不是 AE 该关心的,AE 只要把执行“完成”就可以。",o:["正确","错误"]},
+      ]},
+      {t:"板块二 · 办公与 AI 工具", q:[
+        {type:"multi",t:"以下“工具—用途”匹配,哪些是合理用法?",o:["AI 助手:快速生成会议纪要与脑图","AI 写作:撰写艺人介绍、合作 brief 等文档初稿","飞书表格 / Excel:制作项目台账、同步合作进度","舆情 / 数据工具:跟踪艺人舆情、粉丝画像与商业价值"]},
+        {type:"single",t:"使用 AI 工具辅助产出物料时,以下哪一项是必须严格把控的?",o:["输出速度越快越好","内容合规性(肖像权、版权、人设不符等风险)","字数越多越显专业","尽量不让客户知道用了 AI"]},
+      ]},
+      {t:"板块三 · 沟通与协作规范", q:[
+        {type:"multi",t:"职场沟通中,以下哪些是值得养成的“留痕 / 确认”习惯?",o:["会议结束后尽快输出会议纪要并同步沟通群","重要的事情发邮件同步客户,留正式书面记录","打完电话后把沟通要点用文字再次确认","所有事情只口头说一遍即可,不必记录"]},
+        {type:"single",t:"关于消息传递,以下哪种原则更稳妥?",o:["好消息第一时间讲,坏消息能拖就拖","好消息可稍晚(落实到位再完整汇报),坏消息第一时间同步","无论好坏都等周报再讲","只讲好消息,坏消息内部消化"]},
+        {type:"single",t:"客户临时提出修改需求,最得体的第一反应是?",o:["当场答应“没问题马上改”","当场拒绝“这个改不了”","先记录清楚,回复“我确认下内部进度,再给您明确答复”","不回复,等内部讨论完再说"]},
+        {type:"single",t:"客户质疑“某艺人报价这么高,为什么这么贵?”,较高情商的回答是?",o:["“就是这个价格,没法便宜”","说明艺人当前商业价值与报价水位,并了解客户预算与权益诉求,保持有来有回","直接降价以促成合作","回复“贵有贵的道理”后不再跟进"]},
+        {type:"judge",t:"判断:与客户的重要决策,只要在聊天工具里口头说一下即可,不必发邮件留书面记录。",o:["正确","错误"]},
+      ]},
+      {t:"板块四 · 基础合规常识", q:[
+        {type:"single",t:"贯穿品牌合作全流程的一条核心工作原则是?",o:["先干活后补单","No PO, No Work(未取得正式采购订单不启动实质性工作)","客户说了算,流程靠后","能省则省"]},
+        {type:"single",t:"关于明星 / 艺人代言的连带责任,以下哪项正确?",o:["艺人不必用过产品也能随意代言","代言人需亲身体验产品,通常需签署《产品使用承诺书》等条款","只要品牌出钱,艺人不承担任何责任","代言内容艺人可随意发挥"]},
+        {type:"multi",t:"以下哪些属于广告宣传中的违禁 / 高风险表述?",o:["“最”“第一”等绝对化用语","食品宣称“保健功效”“阻止油脂和糖分吸收”","宣称“28 天逆转 15 年牙渍”等夸大功效","医疗器械利用代言人作推荐、证明"]},
+        {type:"single",t:"同品类竞品代言切换时,通常建议的物料下架 / 消化(排他)期约为?",o:["3–6 个月","1 周","随时可切换,无需过渡","2 年"]},
+      ]},
+      {t:"板块五 · 综艺 / 执行基础", q:[
+        {type:"single",t:"综艺项目品牌商务执行的 5 个阶段,正确顺序是?",o:["前期 → 初期 → 中期 → 后期 → 结案","初期 → 前期 → 中期 → 后期 → 结案","初期 → 中期 → 前期 → 结案 → 后期","策划 → 执行 → 复盘"]},
+        {type:"multi",t:"综艺“包装权益”通常包括以下哪些?",o:["标板","特效字","跑马灯","片尾鸣谢"]},
+        {type:"single",t:"综艺赞助等级中,通常“权益最高、独占性最强”的是?",o:["联合赞助","行业赞助","总冠名","指定 / 特约"]},
+        {type:"single",t:"录制现场所需的实体物料,通常应提前多久送达?",o:["当天送达即可","提前 3–5 天","提前 1 小时","录制结束后补送"]},
+        {type:"single",t:"综艺节目组中,“项目总负责人、掌握最高权力”的角色通常是?",o:["现场导演","场记","制片人","摄像"]},
+        {type:"judge",t:"判断:拿到客户模糊的“要年轻”这类需求,可以不追问就直接下发给设计团队执行。",o:["正确","错误"]},
+      ]},
+      {t:"板块六 · 开放论述", q:[
+        {type:"open",t:"情境题:入职第一周,你负责跟进一个艺人代言“官宣”项目。官宣前一天,客户临时要求把官宣时间提前一天,但艺人方的物料尚未最终确认。请描述你会如何处理:你的沟通顺序、需要同步哪些方、如何留痕、以及如何管理客户预期。",hint:"建议覆盖:① 第一反应与判断;② 同步顺序(艺人方 / 品牌方 / 内部);③ 物料未确认时的合规底线;④ 书面留痕方式;⑤ 给客户的预期管理话术。",min:200},
+      ]},
+    ]
+  },
+
+  pr:{
+    name:"艺人 PR 项目管理岗",
+    role:"Account Manager · 艺人 PR / 合规执行",
+    level:"进阶",
+    step:"02",
+    desc:"统筹艺人合作全周期:风险背调、权益谈判、拍摄与活动执行、官宣与舆情管理。考察对合规白皮书与执行标准的深度掌握。",
+    tags:["品牌/艺人背调","权益与合规","拍摄执行","官宣流程","舆情管理","权益追踪"],
+    sub:"题目覆盖艺人合作全周期合规与执行要点,并含 2 道开放论述题,检验你的风险判断与统筹能力。",
+    sections:[
+      {t:"板块一 · 合作前期风险防控", q:[
+        {type:"multi",t:"合作前对“品牌方身份/风险”的全面评估,应覆盖哪些维度?",o:["企业资质、法律纠纷、纳税情况","消费者产品评价、过往代言舆情","品牌健康度报告、合作身份自查","行业许可与资质(如食品 SC、美妆备案等)"]},
+        {type:"single",t:"根据《广告法》,以下哪类产品“不得利用广告代言人作推荐、证明”?",o:["普通饮料","医疗器械","服装","美妆"]},
+        {type:"multi",t:"艺人风险背调通常包含哪些维度?",o:["政治立场(是否涉及敏感议题)","法律纠纷(吸毒、酒驾、偷税漏税等)","舆情风险(粉丝群体行为、社会伦理/职业道德负面)","商业竞品关联与排他期"]},
+        {type:"single",t:"关于外籍艺人,以下背调做法哪项正确?",o:["外籍艺人无需核查政治立场","外籍艺人同样需核查国家主权相关表述与政治立场","只要粉丝多就可合作","外籍艺人不受合规约束"]},
+      ]},
+      {t:"板块二 · 权益谈判与拍摄执行", q:[
+        {type:"multi",t:"合作排他条款通常从哪些维度进行限制?",o:["时间限制","品类限制(如饮料类竞品)","地域范围(如中国大陆)","对手身高"]},
+        {type:"single",t:"拍摄日时长界定中,“全时段计算”与“纯拍摄计算”的关键区别是?",o:["两者完全一样","全时段含妆发/用餐/转场等;纯拍摄从首次正式开机起算,不含首次妆发造型时间","纯拍摄时间一定更长","由客户随意决定"]},
+        {type:"single",t:"原则上,艺人单个工作日的拍摄时长一般不超过?",o:["4 小时","8–12 小时","24 小时","不设上限"]},
+        {type:"single",t:"标准 ID 视频的常规规格通常是?",o:["60 秒以上、复杂场景切换","15–30 秒,固定机位 + 固定白色背景、画面聚焦艺人","必须实景拍摄、时长不限","由摄影师即兴决定"]},
+        {type:"multi",t:"拍摄时长记录规范建议记录哪些关键节点?",o:["艺人抵达时间","艺人妆发完成时间、第一镜开始时间","换镜/转场/休息/VO 录制等关键节点","收工时间"]},
+        {type:"single",t:"关于 VO(画外音)录制,通常的安排与要点是?",o:["随便找时间录,不必确认","通常安排在拍摄日最后环节,需请品牌方现场确认文案与效果,避免后期需补录","录完直接上线,无需确认","只能由艺人本人手机录制"]},
+      ]},
+      {t:"板块三 · 官宣与终止期管理", q:[
+        {type:"single",t:"新代言人官宣,物料应在多久内覆盖全渠道(官网、电商、社交媒体等)?",o:["48 小时内","一周内","一个月内","无时效要求"]},
+        {type:"multi",t:"旧代言人撤换时(同级别更替),社交媒体侧需要做哪些动作?",o:["取消置顶","删除关联话题","更新官方介绍/头图","更换线下门店海报、户外广告"]},
+        {type:"single",t:"艺人周边产品按国家《清朗》相关规定,通常只能作为?",o:["独立商品单独销售","与产品销量捆绑销售","品牌促销活动的赠品","艺人个人收入来源"]},
+        {type:"judge",t:"判断:所有涉及艺人的物料,只要品牌方确认即可上线,不必经艺人书面确认。",o:["正确","错误"]},
+        {type:"single",t:"合作终止过渡:代理公司/品牌通常应在合约到期前多久,以邮件正式提醒完成物料下架?",o:["到期前 1 个月","到期当天","到期后再说","无需提醒"]},
+      ]},
+      {t:"板块四 · 舆情、直播与线下活动", q:[
+        {type:"single",t:"负面舆情危机响应的常见时效要求是?",o:["24 小时内发布声明,48 小时内提供解决方案","一周内回应即可","等热度过去自然平息","只在内部讨论,不对外回应"]},
+        {type:"multi",t:"舆情分级机制通常分为哪三级?",o:["一般","中度","重度","致命"]},
+        {type:"single",t:"外籍艺人参与直播,通常需提前多久向文化主管部门报备?",o:["30 天","3 天","当天","无需报备"]},
+        {type:"single",t:"线下公众活动人数超过多少,需提前 30 天向公安机关报批?",o:["50 人","100 人","200 人","1000 人"]},
+        {type:"single",t:"直播前为避免负面评论刷屏,需提前向艺人方获取什么?",o:["艺人身份证","屏蔽词 / 敏感词列表","粉丝名单","竞品报价"]},
+      ]},
+      {t:"板块五 · 权益追踪与知识产权", q:[
+        {type:"multi",t:"为确保权益落地,常用的项目管理工具 / 动作包括?",o:["项目时间表(标注关键节点与负责人)","会议记录(决议、待办、时限)","WIP 项目进展表","阶段性成果 Milestone 复盘"]},
+        {type:"single",t:"艺人合作到期前多久,应启动权益复盘、核查未消耗权益?",o:["1–2 个月","到期当天","到期后补做","不必复盘"]},
+        {type:"single",t:"知识产权约定中,拍摄成片著作权通常如何归属?",o:["全部归艺人","著作权一般归品牌方,艺人保留肖像权","归摄影师个人","无需约定"]},
+        {type:"judge",t:"判断:拍摄产生的未剪辑原始素材、花絮、工作照,品牌方可未经艺人方同意直接使用。",o:["正确","错误"]},
+      ]},
+      {t:"板块六 · 开放论述", q:[
+        {type:"open",t:"应急情境:你负责的艺人在某品牌代言“官宣前夕”突然因与前公司的商业纠纷被“限制高消费”冲上热搜(无劣迹认定、无官方处罚)。请作为艺人 PR 项目管理岗,写出你的应急处理流程。",hint:"建议覆盖:① 风险穿透核查与定性(是否触发合同劣迹/违约条款);② 向客户完整、不夸大地同步信息;③ 给客户的多套决策方案(如按计划官宣/延期观察/解约);④ 官宣前后的舆情护航与闭环复盘。",min:250},
+        {type:"open",t:"执行情境:请描述一次完整的“艺人拍摄日执行管理”——从拍摄前两周到拍摄当天收工,你作为 PR / PM 需要把控的关键节点、需与艺人方与品牌方确认的事项,以及现场如何记录与留痕。",hint:"建议覆盖:① 前期确认节点(创意/拍摄内容/试装/摄影师导演匹配);② 拍摄细节的锁定时间;③ 单日工时与时长记录;④ VO/物料/合规要点;⑤ 现场实时同步机制。",min:200},
+      ]},
+    ]
+  },
+
+  creative:{
+    name:"创意策划的管理岗",
+    role:"Account Director · 创意 / 策略管理",
+    level:"管理",
+    step:"03",
+    desc:"对业绩与利润负责,驱动业务增长。统筹比稿、策略输出、跨部门协同、团队建设与风险前置。考察战略思维、商务与管理能力。",
+    tags:["比稿统筹","策略与提案","利润意识","跨部门协同","团队建设","商务拓展"],
+    sub:"题目聚焦比稿、策略、利润与团队管理,并含 2 道开放论述题,检验你从“执行者”到“价值掌舵者”的能力。",
+    sections:[
+      {t:"板块一 · 比稿(Pitch)统筹", q:[
+        {type:"single",t:"进入 AD / 业务总监阶段,核心目标转变为?",o:["继续把执行细节做到极致","对业绩与利润负责,驱动业务增长","只做客户关系维护","专注内部流程优化"]},
+        {type:"single",t:"比稿中“技术标”与“商务标”的核心区别是?",o:["技术标=价格单;商务标=能力说明书","技术标=能力说明书(多懂多会干);商务标=价格单与合同(多少钱、按什么规矩)","两者是同一份文件","只有大公司才区分"]},
+        {type:"multi",t:"判断比稿真伪/可行性,应重点关注哪些?",o:["邀请来源(有无合作历史)","准备周期是否满足筹备需求","无合作历史却突然热情邀请、且交付期极短,警惕“凑数”风险","若准备期不足可正式申请延长交付时间"]},
+        {type:"single",t:"Chemistry meeting(摸底会议)的核心价值是?",o:["纯粹寒暄,无实质作用","决定乙方能否进入正式比稿体系,并建立初期客户信任","只为收集客户联系方式","替代正式提案"]},
+        {type:"single",t:"在多家供应商共同参加的 Briefing / 答疑会上,提问需特别注意?",o:["尽量多透露自己公司的方案细节","问题会同步给所有竞争对手;入会与提问时通常不能透露公司与个人名称","越早暴露公司名越好","可以随意提问,无须顾虑"]},
+      ]},
+      {t:"板块二 · 提案与赢标", q:[
+        {type:"single",t:"关于比稿前的 Rehearsal(预演),通常如何安排?",o:["不需要预演,临场发挥","一般比稿前 2 天 1 次、前 1 天 1 次,至少 2 次","只在提交当天演练一次","交给实习生准备即可"]},
+        {type:"multi",t:"商务标交付时,以下哪些是重要事项?",o:["永远有“备份”、注意文件名格式","核对每项报价并明确报价有效期","文件打上水印","发出商务标邮件后 2–4 小时,再发微信/短信提醒甲方关键联系人"]},
+        {type:"multi",t:"以下哪些信号说明你“可能会赢这个标”?",o:["甲方主动、反复和你讨论预算、付款方式等细节","客户提问细致,互动度高","提出更“执行层”的延伸问题(如“后续还想做 XX 能接吗”)","关键决策者主动走过来交换私人微信"]},
+        {type:"single",t:"提案现场提升赢面的“Wow Moment”指的是?",o:["报价压到最低","在提案现场设计一个令人难忘的瞬间","PPT 页数尽量多","全程念稿不互动"]},
+      ]},
+      {t:"板块三 · 合作分级与利润", q:[
+        {type:"single",t:"合作 title 的“量级”,由高到低的正确顺序是?",o:["体验官 > 挚友 > 大使 > 代言人","品牌代言人 > 产品线代言人 > 大使 > 挚友 > 体验官","大使 > 品牌代言人 > 体验官","随意排列即可"]},
+        {type:"single",t:"合作 title 的“地域”由大到小的顺序是?",o:["中国 > 大中华 > 亚太 > 全球","全球 > 亚太 > 大中华 > 中国","亚太 > 全球 > 中国","地域不影响 title"]},
+        {type:"single",t:"作为 AD,关于成本与利润,以下哪项是必须坚守的红线?",o:["可先口头给客户承诺折扣,事后再补财务确认","严禁向客户承诺未经财务确认的报价、折扣、付款方式","为拿单可无审批超预算执行","成本细节不必让财务知道"]},
+        {type:"single",t:"回款逾期三级预警中,逾期 30 天通常由谁发起正式催款函并联动法务?",o:["AE 日常对接人","AM(客户经理)","AD(总监)","财务独立处理"]},
+        {type:"multi",t:"单客利润管理中,AD 应联动财务做哪些?",o:["预算四象限拆解(固定/可变、必选/可选)","建立动态跟踪台账、月度对账","制定单客毛利率/净利率目标","项目结案后全成本核算与复盘"]},
+      ]},
+      {t:"板块四 · 跨部门协同与管理", q:[
+        {type:"multi",t:"作为创意/客户之间的“翻译官”,优秀 AD 应做到?",o:["对内为创意团队挡掉无意义的、个人偏好的修改","清晰传递客户的核心商业目标","对外为创意/策略方案做“辩护人”,讲清背后的商业逻辑","拒绝做“无脑传话筒”"]},
+        {type:"single",t:"客户反馈分层管理中,“无明确商业逻辑、仅为决策人个人喜好”的反馈应如何处理?",o:["原样转发给创意团队照改","先与客户沟通修改必要性,尽量为创意团队挡掉无意义修改","直接忽略客户","让客户自己改"]},
+        {type:"single",t:"关于创意保护(尤其未中标项目),正确做法是?",o:["创意公开无所谓","加水印/标识,并对未中标创意做阶段性跟踪,避免被“空手套白狼”盗用","谁拿走都行","只口头提醒一下"]},
+        {type:"single",t:"brief 双确认机制的正确流程顺序是?",o:["直接开干,边做边问","客户需求解码 → 内部 brief 对齐 → 客户签字确认后再启动工作","内部先做完再问客户","只要客户口头说了就执行"]},
+        {type:"judge",t:"判断:为了赶进度,可以“先执行、后补合同与法务备案”。",o:["正确","错误"]},
+      ]},
+      {t:"板块五 · 行业认知与成长", q:[
+        {type:"single",t:"“田忌赛马”策略在 Account 工作中指的是?",o:["压低报价抢标","项目评奖时结合自身优势筛选适配奖项,避免盲目申报","随意更换团队","盲目对标头部"]},
+        {type:"single",t:"美妆护肤行业的底层逻辑通常是?",o:["渠道为王、慢节奏","流量驱动 + 成分内卷 + 细分赛道极致分化,对热点时效性要求最高","纯线下、无社媒","价格越高越好卖"]},
+        {type:"multi",t:"比稿对团队成长的作用包括?",o:["从执行者到管理者,提升战略思维","短时间高强度知识输入,快速扩容知识体系","跨部门协同共渡难关,形成“革命友谊”","无客户框架限制下激发创新潜能"]},
+      ]},
+      {t:"板块六 · 开放论述", q:[
+        {type:"open",t:"比稿统筹:某新消费茶饮品牌(与巧豆无合作历史)邀请参与“年度代言人 + 整合营销”比稿,要求 2 周交稿。请作为创意策划管理岗,写出你的比稿统筹方案。",hint:"建议覆盖:① 比稿真伪/可行性判断与应对;② 团队组建与分工(项目管理人、策略、创意、设计、商务等);③ 关键时间节点(含 Rehearsal 安排);④ 提案文件的核心结构(品牌策略/洞察/内容主体/落地方法论/KPI 与预算/团队介绍);⑤ 你打算设计的“必赢点 / Wow Moment”。",min:300},
+        {type:"open",t:"团队管理:作为带团队的管理岗,请描述你如何搭建一支高效的项目执行梯队并做好新人赋能。",hint:"建议覆盖:① 团队分工(执行/对接/物料/舆情等);② 新人培养重点(艺人商务、客户沟通等专业能力);③ 协作机制与减少内耗;④ 风险前置与压力疏导。",min:200},
+      ]},
+    ]
+  }
+};
+
+/* ============================================================
+   STATE & NAV
+============================================================ */
+let state = { pos:null, answers:{}, total:0, openIds:[] };
+
+const screens = ["intro","info","q","done"];
+function go(name){
+  screens.forEach(s=>document.getElementById("screen-"+s).classList.toggle("active", s===name));
+  updateProgress(name);
+  document.getElementById("floating").classList.toggle("show", name==="q");
+}
+function scrollTop(){ window.scrollTo({top:0,behavior:"smooth"}); }
+function updateProgress(name){
+  const map={intro:8, info:25, q:70, done:100};
+  const lbl={intro:"开始", info:"信息", q:"作答", done:"完成"};
+  document.getElementById("pbar").style.width = (map[name]||0)+"%";
+  document.getElementById("plabel").textContent = lbl[name]||"";
+}
+
+/* ---- render position cards ---- */
+function renderTracks(){
+  const wrap=document.getElementById("tracks");
+  wrap.innerHTML="";
+  Object.entries(POSITIONS).forEach(([key,p])=>{
+    const el=document.createElement("div");
+    el.className="track"; el.dataset.key=key;
+    el.innerHTML=`
+      <div class="lvl">
+        <span class="badge">${p.level}</span>
+        <div class="step">${p.step}</div>
+      </div>
+      <div class="body">
+        <h3>${p.name}</h3>
+        <div class="role">${p.role}</div>
+        <p>${p.desc}</p>
+        <div class="tags">${p.tags.map(t=>`<span>${t}</span>`).join("")}</div>
+      </div>
+      <div class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`;
+    el.onclick=()=>{
+      document.querySelectorAll(".track").forEach(t=>t.classList.remove("sel"));
+      el.classList.add("sel");
+      state.pos=key;
+      document.getElementById("e-track").textContent="";
+    };
+    wrap.appendChild(el);
+  });
+}
+
+/* ---- validation ---- */
+function validInfo(){
+  let ok=true;
+  const name=document.getElementById("f-name").value.trim();
+  const phone=document.getElementById("f-phone").value.trim();
+  const email=document.getElementById("f-email").value.trim();
+  const setErr=(f,e,msg)=>{document.getElementById(f).classList.toggle("err",!!msg);document.getElementById(e).textContent=msg||"";};
+  setErr("f-name","e-name", name?"":"请填写姓名"); if(!name)ok=false;
+  const phoneOk = phone.length>=6 && /[0-9]/.test(phone);
+  setErr("f-phone","e-phone", phoneOk?"":"请填写有效的联系方式"); if(!phoneOk)ok=false;
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  setErr("f-email","e-email", emailOk?"":"请填写有效的邮箱地址"); if(!emailOk)ok=false;
+  if(!state.pos){ document.getElementById("e-track").textContent="请选择一个应聘岗位"; ok=false; }
+  return ok;
+}
+
+/* ---- build questions ---- */
+function startQuestions(){
+  if(!validInfo()){
+    const firstErr=document.querySelector(".err") || (!state.pos?document.getElementById("tracks"):null);
+    if(firstErr) firstErr.scrollIntoView({behavior:"smooth",block:"center"});
+    return;
+  }
+  buildQuestions();
+  go("q"); scrollTop();
+}
+
+function buildQuestions(){
+  const p=POSITIONS[state.pos];
+  state.answers={}; state.total=0; state.openIds=[];
+  document.getElementById("q-pill").innerHTML=`● ${p.level} · ${p.name}`;
+  document.getElementById("q-title").textContent=p.name+" · 测评题目";
+  document.getElementById("q-sub").textContent=p.sub;
+  const body=document.getElementById("qbody");
+  body.innerHTML="";
+  let qn=0;
+  p.sections.forEach((sec,si)=>{
+    const secEl=document.createElement("div");
+    secEl.className="qsection";
+    const secCount=sec.q.length;
+    secEl.innerHTML=`<div class="qsection-bar"><span class="idx">${String(si+1).padStart(2,"0")}</span><h3>${sec.t}</h3><span class="cnt">${secCount} 题</span></div>`;
+    sec.q.forEach(q=>{
+      qn++; state.total++;
+      const id="q"+qn;
+      const qEl=document.createElement("div");
+      qEl.className="q"; qEl.id=id; qEl.dataset.qid=id;
+      const typeLabel={single:"单选",multi:"多选",judge:"判断",open:"开放"}[q.type];
+      const typeClass=q.type==="multi"?"multi":(q.type==="open"?"open":"");
+      let inner=`<div class="q-top"><div class="q-num">${qn}</div><div class="q-text">${q.t}<span class="q-type ${typeClass}">${typeLabel}</span></div></div>`;
+      if(q.type==="open"){
+        state.openIds.push(id);
+        inner+=`<div class="open-wrap">
+          ${q.hint?`<div class="open-hint"><b>提示</b>　${q.hint}</div>`:""}
+          <textarea id="${id}-ta" placeholder="请在此作答…（建议不少于 ${q.min} 字）" oninput="onOpen('${id}',${q.min})"></textarea>
+          <div class="open-meta"><span>开放题没有标准答案,我们看重你的逻辑、细节与对岗位的理解</span><span class="cc" id="${id}-cc">0 字</span></div>
+        </div>`;
+      } else {
+        const isMulti=q.type==="multi";
+        inner+=`<div class="opts">`;
+        q.o.forEach((opt,oi)=>{
+          const letter=String.fromCharCode(65+oi);
+          inner+=`<div class="opt ${isMulti?'multi':'single'}" id="${id}-o${oi}" onclick="pick('${id}',${oi},${isMulti})">
+            <div class="mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="letter">${letter}</div><div class="txt">${opt}</div></div>`;
+        });
+        inner+=`</div>`;
+      }
+      qEl.innerHTML=inner;
+      secEl.appendChild(qEl);
+    });
+    body.appendChild(secEl);
+  });
+  document.getElementById("fTotal").textContent=state.total;
+  if(state.openIds.length){
+    document.getElementById("fOpen").textContent=`　· 含 ${state.openIds.length} 道开放题`;
+  } else { document.getElementById("fOpen").textContent=""; }
+  refreshCounts();
+}
+
+/* ---- answering ---- */
+function pick(id,oi,isMulti){
+  if(isMulti){
+    const cur=state.answers[id]||[];
+    const idx=cur.indexOf(oi);
+    if(idx>-1) cur.splice(idx,1); else cur.push(oi);
+    state.answers[id]=cur.slice().sort((a,b)=>a-b);
+    if(state.answers[id].length===0) delete state.answers[id];
+    // toggle UI
+    const el=document.getElementById(id+"-o"+oi);
+    el.classList.toggle("on", (state.answers[id]||[]).includes(oi));
+  } else {
+    state.answers[id]=oi;
+    const q=document.getElementById(id);
+    q.querySelectorAll(".opt").forEach((o,i)=>o.classList.toggle("on",i===oi));
+  }
+  markAnswered(id);
+  refreshCounts();
+}
+function onOpen(id,min){
+  const ta=document.getElementById(id+"-ta");
+  const v=ta.value.trim();
+  state.answers[id]=v;
+  if(v.length===0) delete state.answers[id];
+  const cc=document.getElementById(id+"-cc");
+  cc.textContent=v.length+" 字";
+  cc.classList.toggle("ok", v.length>=min);
+  markAnswered(id);
+  refreshCounts();
+}
+function markAnswered(id){
+  const q=document.getElementById(id);
+  const done = state.answers.hasOwnProperty(id) &&
+    !(Array.isArray(state.answers[id]) && state.answers[id].length===0) &&
+    !(typeof state.answers[id]==="string" && state.answers[id].trim()==="");
+  q.classList.toggle("answered", done);
+  if(done) q.classList.remove("flag");
+}
+function answeredCount(){
+  let c=0;
+  document.querySelectorAll(".q").forEach(q=>{ if(q.classList.contains("answered")) c++; });
+  return c;
+}
+function refreshCounts(){
+  const a=answeredCount();
+  document.getElementById("fAnswered").textContent=a;
+  const remain=state.total-a;
+  document.getElementById("remainCount").textContent=remain;
+  const btn=document.getElementById("submitBtn");
+  const pbar=document.getElementById("pbar");
+  pbar.style.width=(25 + (a/state.total)*60)+"%";
+}
+function jumpSubmit(){ document.querySelector(".submit-block").scrollIntoView({behavior:"smooth",block:"center"}); }
+
+/* ---- submit ---- */
+function submitTest(){
+  const unanswered=[];
+  document.querySelectorAll(".q").forEach(q=>{ if(!q.classList.contains("answered")) unanswered.push(q); });
+  if(unanswered.length){
+    unanswered.forEach(q=>q.classList.add("flag"));
+    document.getElementById("floating").classList.remove("show");
+    alert(`还有 ${unanswered.length} 题未作答,已为你高亮标记。请完成后再提交。`);
+    unanswered[0].scrollIntoView({behavior:"smooth",block:"center"});
+    document.getElementById("floating").classList.add("show");
+    return;
+  }
+  sendSubmission();
+}
+
+/* ---- collect payload (NO answer keys live on this page) ---- */
+function collectPayload(){
+  const p=POSITIONS[state.pos];
+  let qn=0, openCount=0;
+  const answers={};
+  p.sections.forEach(sec=>{
+    sec.q.forEach(q=>{
+      qn++; const id="q"+qn;
+      const v=state.answers[id];
+      if(q.type==="open"){ openCount++; answers[id]=(typeof v==="string")?v:""; }
+      else if(q.type==="multi"){ answers[id]=Array.isArray(v)?v.slice().sort((a,b)=>a-b):[]; }
+      else { answers[id]=(v==null)?null:v; }
+    });
+  });
+  return {
+    position: state.pos, position_name: p.name,
+    name: document.getElementById("f-name").value.trim(),
+    phone: document.getElementById("f-phone").value.trim(),
+    email: document.getElementById("f-email").value.trim(),
+    answers: answers, total: state.total, open_count: openCount
+  };
+}
+
+let LAST_PAYLOAD=null;
+function backendReady(){
+  return CONFIG.SUPABASE_URL && CONFIG.SUPABASE_URL.indexOf("YOUR-")===-1
+    && CONFIG.SUPABASE_ANON_KEY && CONFIG.SUPABASE_ANON_KEY.indexOf("YOUR-")===-1;
+}
+async function sendSubmission(){
+  const btn=document.getElementById("submitBtn");
+  const payload=collectPayload(); LAST_PAYLOAD=payload;
+  if(!backendReady()){
+    console.warn("Supabase 未配置,转为本地备份下载模式。");
+    renderSummary(payload); downloadBackup(payload);
+    go("done"); scrollTop(); return;
+  }
+  btn.disabled=true; const old=btn.innerHTML; btn.innerHTML='<span class="cjk">提交中…</span>';
+  try{
+    const key=CONFIG.SUPABASE_ANON_KEY;
+    const headers={ "Content-Type":"application/json", "apikey":key, "Prefer":"return=minimal" };
+    // 旧版 anon key 是 JWT(以 eyJ 开头),放进 Authorization;新版 publishable key(sb_ 开头)只用 apikey。
+    if(/^eyJ/.test(key)){ headers["Authorization"]="Bearer "+key; }
+    const res=await fetch(`${CONFIG.SUPABASE_URL}/rest/v1/${CONFIG.TABLE}`,{
+      method:"POST",
+      headers:headers,
+      body:JSON.stringify({
+        position:payload.position, position_name:payload.position_name,
+        name:payload.name, phone:payload.phone, email:payload.email,
+        answers:payload.answers, total:payload.total, open_count:payload.open_count
+      })
+    });
+    if(!res.ok){ const t=await res.text(); throw new Error("HTTP "+res.status+" "+t); }
+    renderSummary(payload);
+    go("done"); scrollTop();
+  }catch(err){
+    console.error(err);
+    btn.disabled=false; btn.innerHTML=old;
+    alert("提交失败,可能是网络问题。点击“确定”后将为你下载一份作答备份,可直接发送给 HR;你也可以稍后重试。");
+    downloadBackup(payload);
+  }
+}
+
+function renderSummary(p){
+  const d=new Date();
+  const fmt=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")} ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
+  document.getElementById("summary").innerHTML=`
+    <div class="row"><span>姓名</span><span>${esc(p.name)}</span></div>
+    <div class="row"><span>应聘岗位</span><span>${esc(p.position_name)}</span></div>
+    <div class="row"><span>联系方式</span><span>${esc(p.phone)}</span></div>
+    <div class="row"><span>邮箱</span><span>${esc(p.email)}</span></div>
+    <div class="row"><span>作答题数</span><span>${p.total} 题（含 ${p.open_count} 道开放题）</span></div>
+    <div class="row"><span>提交时间</span><span>${fmt}</span></div>`;
+}
+function esc(s){return (s||"").replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+/* fallback: download a backup the candidate can email if backend is unreachable */
+function downloadBackup(p){
+  const blob=new Blob([JSON.stringify(p,null,2)],{type:"application/json;charset=utf-8"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  const safe=s=>(s||"").replace(/[\\/:*?"<>|]/g,"");
+  a.href=url; a.download=`巧豆测评备份_${safe(p.name)}_${safe(p.position_name)}.json`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url),1500);
+}
+
+/* init */
+renderTracks();
+updateProgress("intro");
+</script>
+</body>
+</html>
